@@ -45,7 +45,7 @@ class SendOrderToSelectedWorkersView(APIView):
 
                 threading.Thread(
                     target=async_to_sync(auto_remove_worker),
-                    args=(order, worker, settings.ORDER_REQUEST_TIMEOUT)
+                    args=(order, worker)
                 ).start()
 
             return Response({"detail": "Tanlangan va mos keladigan workerlarga xabar yuborildi!"})
