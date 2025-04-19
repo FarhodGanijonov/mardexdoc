@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sfxtedi$dh=#e!n=#nwmi35^(26o0(z556j5-7d+^%e#n3t6$z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['farhodmardex.uzfati.uz', 'localhost', '127.0.0.1']
 
@@ -89,10 +89,22 @@ ASGI_APPLICATION = 'config.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mardex',  # PostgreSQL bazasi nomi
+        'USER': 'user_mardex',  # PostgreSQL foydalanuvchi nomi
+        'PASSWORD': 'password_mardex',  # PostgreSQL paroli
+        'HOST': 'mardex_db',  # Docker Compose'dagi konteyner nomi
+        'PORT': '5432',  # PostgreSQL uchun standart port
     }
 }
 
@@ -168,7 +180,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],  # redis porti
+            "hosts": [("redis", 6379)],  # redis porti
         },
     },
 }
